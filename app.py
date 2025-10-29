@@ -32,7 +32,7 @@ if st.button("ส่งคำถาม"):
         st.info(f"คำถามของคุณคือ: {user_question}")
         
         # เริ่มเชื่อมต่อกับ Gemini Model
-        model = genai.GenerativeModel('gemini-pro')
+        model = genai.GenerativeModel('gemini-2.5-flash')
         
         # ส่งคำถามไปให้ AI
         response = model.generate_content(user_question)
