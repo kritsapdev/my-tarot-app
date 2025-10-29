@@ -5,8 +5,16 @@ from dotenv import load_dotenv
 
 # --- การตั้งค่าพื้นฐาน ---
 load_dotenv()
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+# ดึง API Key: ตรวจสอบจาก Streamlit Secrets ก่อน, ถ้าไม่มีให้ดึงจาก .env (สำหรับ Local)
+try:
+    # สำหรับ Streamlit Cloud
+    GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+except KeyError:
+    # สำหรับ Local Environment
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+
 genai.configure(api_key=GOOGLE_API_KEY)
+
 
 # --- ส่วนของการโหลดโมเดล (ใช้ Cache เพื่อความเร็ว) ---
 @st.cache_resource
